@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import os
 
 # Read image
 im_in = cv2.imread('/Users/georgedamoulakis/PycharmProjects/Droplets/split.jpg', cv2.IMREAD_GRAYSCALE);
@@ -22,18 +23,17 @@ def CountingCC():
     blur2 = cv2.blur(blur,(3,3))
     blur3 = cv2.blur(blur2,(1,1))
     kernel = np.ones((10,10),np.uint8)
-    erosion2 = cv2.erode(blur3, kernel, iterations=4)
-    dilation2 = cv2.dilate(erosion2,kernel,iterations=3)
+    erosion2 = cv2.erode(blur3, kernel, iterations=3)
+    dilation2 = cv2.dilate(erosion2,kernel,iterations=1)
     blur4 = cv2.blur(dilation2,(5,5))
-    erosion = cv2.erode(blur4, kernel, iterations=1)
+    erosion = cv2.erode(blur4, kernel, iterations=0)
     dilation = cv2.dilate(erosion,kernel,iterations=0)
 
     #count droplets
-    components, nlabels, labels, stats, centroids = CC(dilation)
+    components, nlabels, labels, stats, centroids = CC(dilation2)
     print(f' There are ', nlabels, ' droplets')
     #print(f' with the following labels: ', labels)
 
-def ShowrImages():
 #resize images, make them ready to show
     small1 = cv2.resize(im_in, (0, 0), fx=0.5, fy=0.5)
     small1 = cv2.cvtColor(small1, cv2.COLOR_GRAY2BGR)
@@ -67,7 +67,16 @@ def ShowrImages():
     cv2.imshow('image2/4, blur2, blur3, ero2', result2)
     cv2.imshow('image3/4, dil2, blur4, ero', result3)
     cv2.imshow('image4/4, dil, blur4, final', result4)
+
+#if you want to save the images
+    #path = '/Users/georgedamoulakis/PycharmProjects/Droplets'
+    #cv2.imwrite(os.path.join(path , '1.jpg'), result1)
+    #cv2.imwrite(os.path.join(path , '2.jpg'), result2)
+    #cv2.imwrite(os.path.join(path , '3.jpg'), result3)
+    #cv2.imwrite(os.path.join(path , '4.jpg'), result4)
+
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 CountingCC()
+
