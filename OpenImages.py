@@ -38,7 +38,7 @@ def CountingCC():
     Y.append(nlabels)
 
 
-mypath='/Users/georgedamoulakis/PycharmProjects/Droplets/splits'
+mypath='/Users/georgedamoulakis/PycharmProjects/Droplets/123split'
 onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath,f))]
 
 images = np.empty(len(onlyfiles), dtype=object)

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
 # Read image
-im_in = cv2.imread('/Users/georgedamoulakis/PycharmProjects/Droplets/split.jpg', cv2.IMREAD_GRAYSCALE);
+im_in = cv2.imread('/Users/georgedamoulakis/PycharmProjects/Droplets/123split/1231.jpg', cv2.IMREAD_GRAYSCALE);
 
 def CountingCC():
 # Threshold, Set values equal to or above 220 to 0, Set values below 220 to 255.
@@ -95,7 +95,7 @@ def CountingCC():
             cv2.circle(out, (x_centr[row], y_centr[row]), int(r), (255, 255, 0, 4))
         column = column + 1
     row = row + 1
-
+    
     cv2.imshow("Final", out)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
