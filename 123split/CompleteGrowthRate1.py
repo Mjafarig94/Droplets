@@ -7,6 +7,16 @@ import pandas as pd
 from os import listdir
 from os.path import isfile, join
 
+
+#------------------------
+# otan sigkirineis ta existence kane sigrkisi SIMILAR kai oxi akribws to idio
+#
+#
+# to problima pou prepei na ftia3w einai oti einai asta8is sta diafora
+#mege8i - douleuei kala mono otan o 1os pinakas einai pio megalos h' isos
+# me ton 2o
+#----------------------
+
 #insert the tables
 M_frame = np.array((([1,2,65],
                      [13,6,50],
