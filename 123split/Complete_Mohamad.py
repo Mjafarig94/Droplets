@@ -27,7 +27,7 @@ for i in range(1, h, 1):
         white[i + 150, j + 150] = im_in[i, j]
 im_in1 = white
 
-# Read the image to do modification
+# Read the image with Pre-modification 
 im_in = cv2.imread('new input for drops.jpg');
 h, w = im_in.shape[:2]
 
