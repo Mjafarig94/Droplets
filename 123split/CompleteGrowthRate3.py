@@ -17,11 +17,11 @@ M_frame = np.array((([1,2,65],
                      [5,5,200],
                      [60,60,400])), float)
 
-M_frame15 = np.array((([13,6,80],
-                       [1,2,100],
-                       [80,80,600],
-                       [1000,1000,1000],
-                       [90,90,997])),float)
+M_frame15 = np.array((([13,6,51],
+                       [1,2,66],
+                       [80,80,550],
+                       [1000,1000,100],
+                       [90,90,500])),float)
 
 #insert function to check and fix input matrices lenghts
 def fix_matrices(Matrix1, Matrix2):
@@ -243,7 +243,35 @@ for row in range(Centr1.shape[0]):
     if exist_or_new_baby[row] == 'no exist':
         new_baby[row] = Centr1[row]
 
-print('This matrix shows the birth of new droplets:')
-print(new_baby)
+#print('This matrix shows the birth of new droplets:')
+#print(new_baby)
+#print('----------------------------------------------------------------')
+
+# if there is a value of 0 (meaning problem) takes out the line
+no_minusZERO_baby = (new_baby == 0).sum(1)
+growth_rate_baby_clean = new_baby[no_minusZERO_baby == 0, :]
+print(f'the clean matrix for growth rate for collisions is :')
+print(growth_rate_baby_clean)
+print('----------------------------------------------------------------')
+
+# now lets collect all the previous data to give the final answer about the
+# growth rate of the frame to frame
+
+#first lets count the droplets
+def percent_of_droplet_style():
+    nu_total_droplets = M_frame15.shape[0]
+    nu_simple_grow_droplets = (diff_area3[:,0]).shape[0]
+    nu_collision_grow_droplets = growth_rate_collision_clean.shape[0]
+    nu_baby_droplets = growth_rate_baby_clean.shape[0]
+
+    weight_simple = (nu_simple_grow_droplets / nu_total_droplets )
+    weight_col = (nu_collision_grow_droplets / nu_total_droplets )
+    weight_baby = (nu_collision_grow_droplets / nu_total_droplets )
+
+    total_Growth_Rate = round((weight_simple* exist_grow_rate) + (weight_col * collision_grow_rate) + (weight_baby *0.5), 3)
+    return total_Growth_Rate
+
+print(f' The total Growth Rate of this frame is : ', percent_of_droplet_style())
+print('----------------------------------------------------------------')
 print('----------------------------------------------------------------')
 
